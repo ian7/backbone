@@ -293,10 +293,12 @@
       options.success = function(resp) {
         if (!model.set(model.parse(resp), options)) return false;
         if (success) success(model, resp);
+	  	if (!options.silent) model.trigger('saved', this, options);
       };
       options.error = wrapError(options.error, model, options);
       var method = this.isNew() ? 'create' : 'update';
       (this.sync || Backbone.sync).call(this, method, this, options);
+
       return this;
     },
 
@@ -312,6 +314,7 @@
       };
       options.error = wrapError(options.error, model, options);
       (this.sync || Backbone.sync).call(this, 'delete', this, options);
+
       return this;
     },
 
