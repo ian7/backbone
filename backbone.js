@@ -1,5 +1,6 @@
 //     Backbone.js 0.3.3
 //     (c) 2010 Jeremy Ashkenas, DocumentCloud Inc.
+//		with updates by Marcin Nowak
 //     Backbone may be freely distributed under the MIT license.
 //     For all details and documentation:
 //     http://documentcloud.github.com/backbone
