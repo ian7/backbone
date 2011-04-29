@@ -506,8 +506,60 @@
       models  || (models = []);
       options || (options = {});
       this.each(this._removeReference);
+	
+	  /* MN: we don't want to remove old elements...
       this._reset();
-      this.add(models, {silent: true});
+	  */
+	  
+	  // first search for new ones to come...
+	
+		  // this has very nice n^2 complexity... hell yeah.
+		  _.each(models, function( newModel ) {
+
+			weHaveThatOne = false;
+			// in case element with this id already exists, in the model list, just safely ignore it
+			_.each( this.models, function( oldModel ) {
+				if( newModel.id == oldModel.get('id') ) {
+					weHaveThatOne = true;
+				}
+			});
+			
+			if( weHaveThatOne == true ){
+				// do nothing - just ignore it
+				// in case there is an uptate coming for the item in question there should be another broadcast issued to inform about it.
+			}
+			else {
+				// add it and _do_not_ make it silent.
+				this.add( newModel )
+			}
+		  }, this);
+	
+	  // then remove those which are not in the list any more
+		  modelsToRemove = [];
+
+		  _.each(this.models, function( oldModel ) {
+			
+			weHaveThatOne = false;
+			// in case element with this id already exists, in the model list, just safely ignore it
+			_.each( models, function( newModel ) {
+				if( oldModel.get('id') == newModel.id ){
+					weHaveThatOne = true;					
+				}
+			});
+			if( weHaveThatOne == true ){
+				// do nothing - just ignore it
+				//alert('a');
+			}
+			else {
+				// add it and _do_not_ make it silent.
+				//this.remove( oldModel )
+				//alert('b');
+				modelsToRemove.push( oldModel );
+			}
+		  }, this );
+	  	
+		  this.remove( modelsToRemove );
+
       if (!options.silent) this.trigger('refresh', this, options);
       return this;
     },

@@ -269,7 +269,7 @@ $(document).ready(function() {
 
   test("Collection: refresh", function() {
     var refreshed = 0;
-    var models = col.models;
+    var models = _.clone(col.models);
     col.bind('refresh', function() { refreshed += 1; });
     col.refresh([]);
     equals(refreshed, 1);
@@ -278,12 +278,12 @@ $(document).ready(function() {
     col.refresh(models);
     equals(refreshed, 2);
     equals(col.length, 4);
-    equals(col.last(), a);
+    equals(col.last(), d);
     col.refresh(_.map(models, function(m){ return m.attributes; }));
     equals(refreshed, 3);
     equals(col.length, 4);
     ok(col.last() !== a);
-    ok(_.isEqual(col.last().attributes, a.attributes));
+    ok(_.isEqual(col.last().attributes, d.attributes));
   });
 
 });
