@@ -505,7 +505,9 @@
     refresh : function(models, options) {
       models  || (models = []);
       options || (options = {});
-      this.each(this._removeReference);
+
+	  //WTF ?: no clue what is this one for...
+      // this.each(this._removeReference);
 	
 	  /* MN: we don't want to remove old elements...
       this._reset();
