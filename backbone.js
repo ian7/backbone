@@ -512,6 +512,9 @@
 	  /* MN: we don't want to remove old elements...
       this._reset();
 	  */
+	  if( options.deepRefresh ) {
+			this._reset();
+	  }
 	  
 	  // first search for new ones to come...
 	
