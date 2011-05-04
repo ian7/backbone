@@ -514,12 +514,20 @@
 	  */
 	  if( options.deepRefresh ) {
 			this._reset();
+/*			_.each( this.models, function( m ) {
+				this.remove( m );
+			}, this);
+*/
+//			this.remove( this.models );
 	  }
 	  
 	  // first search for new ones to come...
 	
 		  // this has very nice n^2 complexity... hell yeah.
-		  _.each(models, function( newModel ) {
+		 for( nIndex = 0; nIndex < models.length; nIndex++ ) {
+			newModel = models[nIndex];
+
+//		  _.each(models, function( newModel ) {
 
 			weHaveThatOne = false;
 			// in case element with this id already exists, in the model list, just safely ignore it
@@ -537,7 +545,8 @@
 				// add it and _do_not_ make it silent.
 				this.add( newModel )
 			}
-		  }, this);
+		  }
+//		  }, this);
 	
 	  // then remove those which are not in the list any more
 		  modelsToRemove = [];
@@ -619,7 +628,19 @@
     },
 
     // Reset all internal state. Called when the collection is refreshed.
-    _reset : function(options) {
+_reset : function(options) {
+    
+     options || (options = {});
+
+     _.each( this.models, function( model ) {
+	     model = this.getByCid(model) || this.get(model);
+	      if (!model) return null;
+	      delete this._byId[model.id];
+	      delete this._byCid[model.cid];
+	      if (!options.silent) model.trigger('remove', model, this, options);
+	      this._removeReference(model);
+  	  }, this);	
+    
       this.length = 0;
       this.models = [];
       this._byId  = {};
