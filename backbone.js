@@ -531,8 +531,9 @@
 
 			weHaveThatOne = false;
 			// in case element with this id already exists, in the model list, just safely ignore it
+			// null ids are ignored now 
 			_.each( this.models, function( oldModel ) {
-				if( newModel.id == oldModel.get('id') ) {
+				if( newModel.id && newModel.id == oldModel.get('id') ) {
 					weHaveThatOne = true;
 				}
 			});
