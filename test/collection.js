@@ -113,6 +113,10 @@ $(document).ready(function() {
     equal(atCol.length, 4);
     equal(atCol.at(1), e);
     equal(atCol.last(), h);
+
+    //cleanup
+    col.unbind('add');
+    otherCol.unbind('add');
   });
 
   test("Collection: add multiple models", function() {
@@ -219,6 +223,8 @@ $(document).ready(function() {
     equal(col.length, 4);
     equal(col.first(), d);
     equal(otherRemoved, null);
+    col.unbind('remove');
+    otherCol.unbind('remove');
   });
 
   test("Collection: shift and pop", function() {
@@ -405,15 +411,15 @@ $(document).ready(function() {
     var refreshed = 0;
     var models = _.clone(col.models);
     col.bind('refresh', function() { refreshed += 1; });
-    col.refresh([]);
+    col.reset([]);
     equals(refreshed, 1);
     equals(col.length, 0);
     equals(col.last(), null);
-    col.refresh(models);
+    col.reset(models);
     equals(refreshed, 2);
     equals(col.length, 4);
     equals(col.last(), d);
-    col.refresh(_.map(models, function(m){ return m.attributes; }));
+    col.reset(_.map(models, function(m){ return m.attributes; }));
     equals(refreshed, 3);
     equals(col.length, 4);
 
