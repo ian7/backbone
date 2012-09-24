@@ -5,6 +5,7 @@
 //     Backbone may be freely distributed under the MIT license.
 //     For all details and documentation:
 //     http://backbonejs.org
+/*global _ */
 
 (function(){
 
@@ -1260,7 +1261,7 @@
   var delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
   // List of view options to be merged as properties.
-  var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName'];
+  var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName','context'];
 
   // Set up all inheritable **Backbone.View** properties and methods.
   _.extend(View.prototype, Events, {
