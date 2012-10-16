@@ -807,7 +807,7 @@
 //		  }, this);
 	
 	  // then remove those which are not in the list any more
-		  modelsToRemove = [];
+		  var modelsToRemove = [];
 
 		  _.each(this.models, function( oldModel ) {
 			
