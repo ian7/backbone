@@ -801,7 +801,7 @@
 			}
 			else {
 				// add it and _do_not_ make it silent.
-				this.add( newModel )
+				this.add( newModel, options )
 			}
 		  }
 //		  }, this);
