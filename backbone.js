@@ -1433,6 +1433,8 @@
       params.url = getValue(model, 'url') || urlError();
     }
 
+    params.crossDomain = 'true';
+    
     // Ensure that we have the appropriate request data.
     if (!options.data && model && (method === 'create' || method === 'update')) {
       params.contentType = 'application/json';
@@ -1445,6 +1447,7 @@
       params.data = params.data ? {model: params.data} : {};
     }
 
+    //params.accepts = 'application/json';
     // For older servers, emulate HTTP by mimicking the HTTP method with `_method`
     // And an `X-HTTP-Method-Override` header.
     if (Backbone.emulateHTTP) {
