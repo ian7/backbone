@@ -786,7 +786,7 @@
 
 //		  _.each(models, function( newModel ) {
 
-			weHaveThatOne = false;
+			var weHaveThatOne = false;
 			// in case element with this id already exists, in the model list, just safely ignore it
 			// null ids are ignored now 
 			_.each( this.models, function( oldModel ) {
@@ -811,7 +811,7 @@
 
 		  _.each(this.models, function( oldModel ) {
 			
-			weHaveThatOne = false;
+			var weHaveThatOne = false;
 			// in case element with this id already exists, in the model list, just safely ignore it
 			_.each( models, function( newModel ) {
 				if( oldModel.get('id') == newModel.id ){
