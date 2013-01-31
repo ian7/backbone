@@ -564,7 +564,10 @@
     if (options.comparator !== void 0) this.comparator = options.comparator;
     this._reset();
     this.initialize.apply(this, arguments);
-    if (models) this.reset(models, {silent: true, parse: options.parse});
+   
+    // MN: i'm not initializing collections by explicitly giving them models in the constructor
+    // MN: hence i leave this one out
+    // if (models) this.reset(models, {silent: true, parse: options.parse});
   };
 
   // Define the Collection's inheritable methods.
