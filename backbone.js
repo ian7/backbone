@@ -565,9 +565,11 @@
     this._reset();
     this.initialize.apply(this, arguments);
    
-    // MN: i'm not initializing collections by explicitly giving them models in the constructor
-    // MN: hence i leave this one out
-    // if (models) this.reset(models, {silent: true, parse: options.parse});
+    // MN: in case there are models supplied as a paramter AND
+    // MN: there are no models created by initialize, then let's reset!
+    if (models && this.models.length == 0) {
+      this.reset(models, {silent: true, parse: options.parse});
+    }
   };
 
   // Define the Collection's inheritable methods.
